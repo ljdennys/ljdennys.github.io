@@ -1,13 +1,15 @@
 // Placeholder MSAL configuration
 const msalConfig = {
     auth: {
-        clientId: 'YOUR_CLIENT_ID', // TODO: replace with real client id
+
+        clientId: '4c0cc39c-4b4d-4c34-b370-66d5eaaace44', // TODO: replace with real client id
         authority: 'https://login.microsoftonline.com/common',
         redirectUri: window.location.origin
     }
 };
 const msalInstance = new msal.PublicClientApplication(msalConfig);
 let account = null;
+
 
 function initAccount() {
     const accounts = msalInstance.getAllAccounts();
