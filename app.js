@@ -1,6 +1,7 @@
 // Placeholder MSAL configuration
 const msalConfig = {
     auth: {
+
         clientId: '4c0cc39c-4b4d-4c34-b370-66d5eaaace44', // TODO: replace with real client id
         authority: 'https://login.microsoftonline.com/common',
         redirectUri: window.location.origin
@@ -8,6 +9,16 @@ const msalConfig = {
 };
 const msalInstance = new msal.PublicClientApplication(msalConfig);
 let account = null;
+
+
+function initAccount() {
+    const accounts = msalInstance.getAllAccounts();
+    if (accounts.length > 0) {
+        account = accounts[0];
+        const info = document.getElementById("user-info");
+        if (info) info.textContent = account.username;
+    }
+}
 
 async function signIn() {
     try {
@@ -133,3 +144,17 @@ document.getElementById('search-form')?.addEventListener('submit', (e) => {
 });
 
 window.addEventListener('load', render);
+window.addEventListener('load', initAccount);
+window.addEventListener('load', renderMyTickets);
+
+function renderMyTickets() {
+    const list = document.getElementById("my-ticket-list");
+    if (!list || !account) return;
+    list.innerHTML = "";
+    loadTickets().filter(t => t.user === account.username).forEach(t => {
+        const li = document.createElement("li");
+        li.textContent = `${t.text} (${t.votes} voti)`;
+        list.appendChild(li);
+    });
+}
+
