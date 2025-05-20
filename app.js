@@ -1,7 +1,7 @@
 // Placeholder MSAL configuration
 const msalConfig = {
     auth: {
-        clientId: 'fc2c1578-e6f6-4da9-9a62-21229cee050f', // TODO: replace with real client id
+        clientId: '4c0cc39c-4b4d-4c34-b370-66d5eaaace44', // TODO: replace with real client id
         authority: 'https://login.microsoftonline.com/common',
         redirectUri: window.location.origin
     }
